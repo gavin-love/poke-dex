@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import './App.css';
 import FakeContainer from '../../containers/FakeContainer'
 import { addPokeAction } from '../../actions/addPokeAction';
+import logo from '../../assets/loading.gif'
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      is_loading: false
+    }
 
   }
 
@@ -16,9 +20,11 @@ class App extends Component {
 
   fetchPoke = async () => {
     try {
+      this.setState({ is_loading: true })
       const response = await fetch('http://localhost:3001/types')
       const result = await response.json();
-      this.props.addPoke(result);
+      await this.props.addPoke(result);
+      this.setState({ is_loading: false })
     } catch (error) {
       console.log(error.message)
     }
@@ -29,6 +35,7 @@ class App extends Component {
       <div className='App'>
         <h1 className='header'> POKéDEX </h1>
         <FakeContainer />
+        {this.state.is_loading === true && <img src={logo} />}
       </div>
     );
   }
