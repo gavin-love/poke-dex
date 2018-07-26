@@ -15,14 +15,16 @@ class CardContainer extends Component {
     const result = await Promise.all(pokemon)
 
     const pokeObj = result.reduce((accum, poke) => {
-      accum[poke.type] = poke
+      accum[poke.type] = [poke]
       return accum
     }, {})
+    console.log(pokeObj);
+
     this.props.addPoke(pokeObj)
   }
 
   render() {
-
+    console.log(this.props.poke)
     const pokeButtons = this.props.type.map((type, index) => {
       return (
         <button
@@ -42,17 +44,13 @@ class CardContainer extends Component {
   }
 }
 
-// FakeContainer.propTypes = {
-//   fake: shape({ fake: string }),
-//   addPokeAction: func.isRequired
-// };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   poke: state.poke,
   type: state.pokeType
 })
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     addPoke: pokeObj => dispatch(addPokeAction(pokeObj))
   }

@@ -1,10 +1,10 @@
 import pokeRuducer from '../reducers/pokeReducer';
-import pokeTypeReduced from '../reducers/pokeTypeReducer'
+import pokeTypeReducer from '../reducers/pokeTypeReducer'
 
 describe('reducers', () => {
   describe('pokeReducer', () => {
     it('should return the initial state', () => {
-      const expected = [];
+      const expected = {};
 
       const result = pokeRuducer(undefined, {});
 
@@ -13,8 +13,11 @@ describe('reducers', () => {
   })
   describe('pokeTypeReducer', () => {
     it('should return the initial state', () => {
-      const expeced = [];
+      const expected = [];
 
+      const result = pokeTypeReducer(undefined, {});
+
+      expect(result).toEqual(expected)
     })
   })
 })
