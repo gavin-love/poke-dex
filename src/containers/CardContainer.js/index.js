@@ -13,16 +13,16 @@ class CardContainer extends Component {
       return result;
     })
     const result = await Promise.all(pokemon)
-    this.props.addPoke(result)
-    this.postPoke()
+
+    const pokeObj = result.reduce((accum, poke) => {
+      accum[poke.type] = poke
+      return accum
+    }, {})
+    this.props.addPoke(pokeObj)
   }
 
   render() {
-    const pokeDex = this.props.poke.map((poke, index) => {
-      return (
-        <p key={index}>{poke.name}</p>
-      )
-    })
+
     const pokeButtons = this.props.type.map((type, index) => {
       return (
         <button
@@ -30,7 +30,6 @@ class CardContainer extends Component {
           onClick={() => this.fetchPoke(index)}
         >
           {type.name}
-          {pokeDex}
         </button>
       )
     })
@@ -55,7 +54,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addPoke: result => dispatch(addPokeAction(result))
+    addPoke: pokeObj => dispatch(addPokeAction(pokeObj))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);

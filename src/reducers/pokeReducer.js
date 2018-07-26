@@ -1,7 +1,7 @@
-const pokeReducer = (state = [], action) => {
+const pokeReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_POKE":
-      return action.poke
+      return { ...state, action.poke }
     default:
       return state;
   }

@@ -18,16 +18,23 @@ class App extends Component {
     this.fetchPoke()
   }
 
-  fetchPoke = async () => {
-    try {
-      this.setState({ is_loading: true })
-      const response = await fetch('http://localhost:3001/types')
-      const result = await response.json();
-      await this.props.addPokeType(result);
-      this.setState({ is_loading: false })
-    } catch (error) {
-      console.log(error.message)
-    }
+  // fetchPoke = async () => {
+  //   try {
+  //     this.setState({ is_loading: true })
+  //     const response = await fetch('http://localhost:3001/types')
+  //     const result = await response.json();
+  //     await this.props.addPokeType(result);
+  //     this.setState({ is_loading: false })
+  //   } catch (error) {
+  //     console.log(error.message)
+  //   }
+  // }
+
+  fetchPoke = () => {
+    fetch('http://localhost:3001/types')
+      .then(response => response.json())
+      .then(result => this.props.addPokeType(result))
+      .catch(error => console.log(error))
   }
 
   render() {
