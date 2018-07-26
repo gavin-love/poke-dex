@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import FakeContainer from '../../containers/FakeContainer'
+import CardContainer from '../../containers/CardContainer.js'
 import { addPokeTypeAction } from '../../actions/addPokeTypeAction';
 import logo from '../../assets/loading.gif'
 
@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1 className='header'> POKéDEX </h1>
-        <FakeContainer />
+        <CardContainer />
         {this.state.is_loading === true && <img src={logo} />}
       </div>
     );
