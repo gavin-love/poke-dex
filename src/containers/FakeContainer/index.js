@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import { connect } from 'react-redux';
-import { fakeAction } from '../../actions/addPokeAction';
+import { addPokeAction } from '../../actions/addPokeAction';
 class FakeContainer extends Component {
 
+
+
+
+  fetchPoke = (e) => {
+    e.preventDefault()
+    console.log('askdfjalsdf')
+  }
   render() {
+
+    const pokeButtons = this.props.type.map(type => {
+      return (
+        <button onClick={() => this.fetchPoke()}>
+          {type.name}
+        </button>
+      )
+    })
     return (
       <div>
-        <button onClick={() => {
-          this.props.fakeAction()
-          alert('FAKE')
-        }}> FAKE </button>
+        {pokeButtons}
       </div>
     );
   }
@@ -18,13 +30,19 @@ class FakeContainer extends Component {
 
 // FakeContainer.propTypes = {
 //   fake: shape({ fake: string }),
-//   fakeAction: func.isRequired
+//   addPokeAction: func.isRequired
 // };
 
-// const mapStateToProps = ({ fake }) => ({ fake });
-// const mapDispatchToProps = dispatch => ({
-//   fakeAction:
-//     () => dispatch(fakeAction())
-// });
-// export default connect(mapStateToProps, mapDispatchToProps)(FakeContainer);
-export default FakeContainer;
+const mapStateToProps = state => ({
+  poke: state.poke,
+  type: state.pokeType
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addPoke: result => dispatch(addPokeAction(result))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FakeContainer);
+
+

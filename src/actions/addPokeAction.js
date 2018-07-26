@@ -1,6 +1,7 @@
-export const addPokeAction = (pokes) => {
+export const addPokeAction = (poke) => {
+  console.log(poke)
   return {
     type: "ADD_POKE",
-    poke: pokes
+    poke: poke
   }
 } 

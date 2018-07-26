@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import FakeContainer from '../../containers/FakeContainer'
-import { addPokeAction } from '../../actions/addPokeAction';
+import { addPokeTypeAction } from '../../actions/addPokeTypeAction';
 import logo from '../../assets/loading.gif'
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
       this.setState({ is_loading: true })
       const response = await fetch('http://localhost:3001/types')
       const result = await response.json();
-      await this.props.addPoke(result);
+      await this.props.addPokeType(result);
       this.setState({ is_loading: false })
     } catch (error) {
       console.log(error.message)
@@ -43,7 +43,7 @@ class App extends Component {
 
 export const mapDispatchToProps = dispatch => {
   return {
-    addPoke: poke => dispatch(addPokeAction(poke))
+    addPokeType: pokeType => dispatch(addPokeTypeAction(pokeType))
   }
 }
 
